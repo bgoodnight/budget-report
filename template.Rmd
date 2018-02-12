@@ -1,8 +1,8 @@
 ---
 title: "Budget Report for PfS C1Y1"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +14,22 @@ states <- map_data("state")
 ourstates <- subset(states, region %in% tolower(data$state.name))
 ```
 
+# Purpose
+1. To determine where and how PfS funds have been utilized across all 16 Cohort 1 states in Year 1
+2. To examine how funds are allocated to partners and activities across all 16 Cohort 1 states in Year 1
+3. To make greater use of our administrative data by:
+    + Informing CDC’s TA provided to PfS States
+    + Providing information to inform future NOAs/NOFOs
+  
+# Evaluation Questions
+1. How are PfS funds for Cohort 1, Year 1 allocated by states across budget categories?
+2. Who have PfS Cohort 1, Year 1 grantees contracted with and what activities are those partners undertaking?
+3. What is the breakdown of indirect vs. direct costs within contracts?
+4. What funding remained unobligated at the end of the first PfS funded year?
+5. Is there a difference in budget allocations between PHAB vs. non-PHAB accredited states?
+
+\newpage
+
 ## Evaluation Question 1
 1. How are PfS funds for Cohort 1, Year 1 allocated by states across budget categories?
 
@@ -23,7 +39,17 @@ ggplot() +
   geom_polygon(data = states, aes(x = long, y = lat, group = group), fill = 'grey85', color = "grey45") +
   geom_polygon(data = ourstates, aes(x = long, y = lat, group = group), fill = 'lightblue', color = "blue") +
   coord_fixed(1.3) +
-  guides(fill=FALSE)
+  guides(fill=FALSE) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank()
+        )
 ```
 > - Range: `r paste('$',formatC(min(data$Total.Funding), big.mark=',', format = 'f', digits = 2))` to `r paste('$',formatC(max(data$Total.Funding), big.mark=',', format = 'f', digits = 2))`
 > - Median: `r paste('$',formatC(median(data$Total.Funding), big.mark=',', format = 'f', digits = 2))`
@@ -38,31 +64,3 @@ The PfS C1Y1 budgets were examined based on the **7 Office of Financial Resource
 5. Travel: `r paste('$',formatC(sum(data$Travel.Amount), big.mark=',', format = 'f', digits = 2))` (`r round((sum(data$Travel.Amount)/sum(data$Total.Funding)*100),digits=2)`% of total)
 6. Supplies: `r paste('$',formatC(sum(data$Supplies.Amount), big.mark=',', format = 'f', digits = 2))` (`r round((sum(data$Supplies.Amount)/sum(data$Total.Funding)*100),digits=2)`% of total)
 7. Equipment: `r paste('$',formatC(sum(data$Equipment.Amount), big.mark=',', format = 'f', digits = 2))` (`r round((sum(data$Equipment.Amount)/sum(data$Total.Funding)*100),digits=2)`% of total)
-
-
-# Purpose
-1. To determine where and how PfS funds have been utilized across all 16 Cohort 1 states in Year 1
-2. To examine how funds are allocated to partners and activities across all 16 Cohort 1 states in Year 1
-3. To make greater use of our administrative data by:
-    + Informing CDC’s TA provided to PfS States
-    + Providing information to inform future NOAs/NOFOs
-  
-# Methodology
-* Utilized a budget analysis tool developed by Justin Uhd from DCPC.  Made alterations to the tool to fit the needs of PfS.
-* Budget data from all 16 Cohort 1, Year 1 states were extracted from the Year 1 NOAs (09/01/2015 to 08/31/2016) and the proposed budget narratives for PfS Year 1 
-* Key partners/contractors and activities were identified and reviewed by 2 reviewers
-* An analysis of the budget data was conducted
-
-# Limitations
-* At this time, we only examined the budget data from PfS Cohort 1, Year 1
-    + Cohort 2 operated on an 18-month grant period so side-by-side comparisons could be difficult
-* Obtained limited FFRs due to files not being saved in the shared PDO file and the current changes/shifts within Grant Solutions
-* Both the NOAs (actual) and budget narratives (proposed) were included
-* The original version of the NOA for Utah was incorrect.  After obtaining the correct version, there was no breakdown of their approved budget (100% allocated to “Other”).  To prevent a skew in data, but to also include Utah, we utilized the data from their Budget Markup document.
-
-# Evaluation Questions
-1. How are PfS funds for Cohort 1, Year 1 allocated by states across budget categories?
-2. Who have PfS Cohort 1, Year 1 grantees contracted with and what activities are those partners undertaking?
-3. What is the breakdown of indirect vs. direct costs within contracts?
-4. What funding remained unobligated at the end of the first PfS funded year?
-5. Is there a difference in budget allocations between PHAB vs. non-PHAB accredited states?
