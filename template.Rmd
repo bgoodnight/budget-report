@@ -14,7 +14,7 @@ states <- map_data("state")
 ourstates <- subset(states, region %in% tolower(data$state.name))
 ```
 
-##Evaluation Question 1
+## Evaluation Question 1
 1. How are PfS funds for Cohort 1, Year 1 allocated by states across budget categories?
 
 > - In Year 1, `r paste('$',formatC(sum(data$Total.Funding), big.mark=',', format = 'f', digits = 2))` was awarded to `r length(data$Grantee.Code)` PfS awardees with a median award of `r paste('$',formatC(median(data$Total.Funding), big.mark=',', format = 'f', digits = 2))`
@@ -60,8 +60,7 @@ The PfS C1Y1 budgets were examined based on the **7 Office of Financial Resource
 * Both the NOAs (actual) and budget narratives (proposed) were included
 * The original version of the NOA for Utah was incorrect.  After obtaining the correct version, there was no breakdown of their approved budget (100% allocated to “Other”).  To prevent a skew in data, but to also include Utah, we utilized the data from their Budget Markup document.
 
-
-#Evaluation Questions
+# Evaluation Questions
 1. How are PfS funds for Cohort 1, Year 1 allocated by states across budget categories?
 2. Who have PfS Cohort 1, Year 1 grantees contracted with and what activities are those partners undertaking?
 3. What is the breakdown of indirect vs. direct costs within contracts?
